@@ -1,0 +1,29 @@
+package sort_project;
+
+public class MergeThread extends baseThread implements Runnable {
+
+	public MergeThread(int LEN, Point[] array) {
+		super(LEN, array, "Merge Sort");
+	}
+
+	public void run() {
+		int left = 0;
+		int right = array.length;
+
+		merge_sort(left, right);
+	}
+
+	private void merge(int left, int mid, int right) {
+
+	}
+
+	private void merge_sort(int left, int right) {
+		int mid = (left + right) / 2;
+
+		if (left < right) {
+			merge_sort(left, mid);
+			merge_sort(right, mid);
+			merge(left, mid, right);
+		}
+	}
+}

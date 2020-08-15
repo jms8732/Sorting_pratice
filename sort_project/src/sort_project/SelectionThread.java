@@ -1,0 +1,54 @@
+package sort_project;
+
+import java.awt.Color;
+import java.util.*;
+
+/*
+ * 선택 정렬 동작 과정
+ * 1. 현재 인덱스를 선택한다.
+ * 2. 다음 인덱스와 비교를 진행하여 가장 작은 값을 찾는다.
+ * 3. 가장 작은 값을 가지고 있는 인덱스가 현재 인덱스와 다른 경우, swap을 한다.
+ * 
+ * 마지막 숫자는 자동으로 정렬이 되기 때문에 array.length - 1 만큼 반복문을 수행한다.
+ */
+
+public class SelectionThread extends baseThread implements Runnable {
+	public SelectionThread(int LEN,Point[] array, int x, int y) {
+		super(LEN,array,"Selection Sort",x,y);
+	}
+
+	public void run() {
+		int least = 0;
+		// 마지막 숫자는 정렬이 자동으로 되기때문에 array.len - 1 만큼 반복문
+		for (int i = 0; i < array.length - 1; i++) {
+			least = i; // 최솟값을 선택
+
+			for (int j = i + 1; j < array.length; j++) {
+				if (array[least].len < array[j].len) {
+					least = j; // 최소 길이 선택
+				}
+			}
+
+			if (least != i) {
+				array[least].color = Color.red;
+				array[i].color = Color.red;
+				b.repaint();
+				sleep();
+
+				Point p = array[least];
+				array[least] = array[i];
+				array[i] = p;
+				b.repaint();
+				sleep();
+
+				array[least].color = Color.white;
+				array[i].color = Color.white;
+				b.repaint();
+				sleep();
+			}
+		}
+
+		finish();
+	}
+
+}

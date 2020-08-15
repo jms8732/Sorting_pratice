@@ -1,0 +1,12 @@
+package sort_project;
+
+public class InsertionThread extends baseThread implements Runnable {
+	
+	public InsertThread(int LEN , Point [] array) {
+		super(LEN,array,"Insertion Sort");
+	}
+
+	public void run() {
+		
+	}
+}

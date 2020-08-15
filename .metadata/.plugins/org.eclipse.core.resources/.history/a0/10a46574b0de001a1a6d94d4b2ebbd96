@@ -1,0 +1,29 @@
+package sort_project;
+
+import java.awt.Color;
+import java.util.*;
+
+/*
+ * 선택 정렬 동작 과정
+ * 1. 주어진 배열에서 최솟값을 찾는다.
+ * 2. 
+ */
+
+public class InsertionThread extends Thread{
+	private Point [] array;
+	private Board b;
+	private long TIME = 1;
+	
+	public InsertionThread(Point[] array) {
+		this.array = new Point[array.length];
+		
+		for(int i =0 ; i < array.length ; i++) {
+			this.array[i] = new Point(array[i].len,Color.white);
+		}
+	}
+	
+	
+	public void run() {
+		
+	}
+}

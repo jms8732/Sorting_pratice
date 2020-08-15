@@ -1,0 +1,27 @@
+package sort_project;
+
+import java.awt.Graphics;
+
+import javax.swing.*;
+
+public class Board extends JFrame{
+	
+	public Board() {
+		setTitle("Sorting Project");
+		setSize(1000,500);
+		setContentPane(new Panel());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+	
+	
+	private class Panel extends JPanel{
+		
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			
+			
+		}
+	}
+
+}

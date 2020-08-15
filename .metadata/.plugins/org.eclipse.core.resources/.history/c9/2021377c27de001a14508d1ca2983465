@@ -1,0 +1,48 @@
+package sort_project;
+
+import java.awt.Color;
+import java.util.*;
+public class BubbleThread extends Thread{
+	private Point [] array;
+	private Board b;
+	private long TIME = 10;
+	
+	public BubbleThread(Point[] array ) {
+		this.array = array;
+		b = new Board(this.array);
+		
+	}
+	
+	public void run() {
+		System.out.println("Start bubble Sort");
+		for(int i =0  ; i < array.length ; i++) {
+			for(int j = i + 1;  j< array.length ; j++) {
+				if(PlaySort.LEN - array[i].y >PlaySort.LEN- array[j].y) {
+					
+					array[i].color = Color.red;
+					array[j].color = Color.red;
+					
+					b.repaint(array);
+					Point temp = array[i];
+					array[i] = array[j];
+					array[j] = temp;
+					
+					b.repaint(array);
+					array[i].color = Color.white;
+					array[j].color = Color.white;
+					
+					b.repaint(array);
+					sleep();
+				}
+			}
+		}
+	}
+	
+	private void sleep() {
+		try {
+			Thread.sleep(TIME);
+		}catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}

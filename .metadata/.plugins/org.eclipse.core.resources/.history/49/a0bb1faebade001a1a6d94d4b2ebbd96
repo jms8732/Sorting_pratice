@@ -1,0 +1,39 @@
+package sort_project;
+
+import java.awt.Color;
+
+/*
+ * »ğÀÔ Á¤·Ä
+ * 
+ */
+
+public class InsertionThread extends baseThread implements Runnable {
+	
+	public InsertionThread(int LEN , Point [] array) {
+		super(LEN,array,"Insertion Sort");
+	}
+
+	public void run() {
+		for(int i = 1 ; i < array.length ; i++) {
+			Point temp = array[i];
+			temp.color = Color.red;
+			b.repaint();
+			
+			for(int j = i-1; j >= 0 ; j --) {
+				if(array[j].len > temp.len) {
+					array[j+1] = array[j];
+					array[j].color = Color.red;
+					b.repaint();
+					
+					array[j].color = Color.red;
+					b.repaint();
+				}else {
+					array[j] = temp;
+					array[j].color = Color.red;
+					b.repaint();
+					break;
+				}
+			}
+		}
+	}
+}

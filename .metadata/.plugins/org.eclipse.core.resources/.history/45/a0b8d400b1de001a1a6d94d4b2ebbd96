@@ -1,0 +1,44 @@
+package sort_project;
+
+import java.awt.Color;
+import java.util.*;
+
+/*
+ * 선택 정렬 동작 과정
+ * 1. 
+ */
+
+public class SelectionThread extends Thread{
+	private Point [] array;
+	private Board b;
+	private long TIME = 1;
+	
+	public SelectionThread(Point[] array) {
+		this.array = new Point[array.length];
+		
+		for(int i =0 ; i < array.length ; i++) {
+			this.array[i] = new Point(array[i].len,Color.white);
+		}
+		b = new Board(this.array);
+	}
+	
+	
+	public void run() {
+		int least = 0;
+		for(int i = 0 ; i < array.length ; i++) {
+			least = i ; //최솟값을 선택
+			
+			for(int j = i+1 ; j < array.length ; j++) {
+				if(array[least].len < array[j].len) {
+					least = j; //최소 길이 선택
+				}
+				
+				if(least != i) {
+					Point p = array[least];
+					array[least] = array[j];
+					array[j] = array[least];
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,72 @@
+package sort_project;
+
+import java.awt.Color;
+import java.util.*;
+
+/*
+ * 버블 정렬
+ * O(n^2) 의 시간이 걸린다.
+ */
+public class BubbleThread extends Thread {
+	private Point[] array;
+	private Board b;
+	private long TIME = 1;
+
+	public BubbleThread(Point[] array) {
+		this.array = new Point[array.length];
+		for(int i =0 ; i < array.length ; i++) {
+			this.array[i] = new Point(array[i].len,array[i].color);
+		}
+		b = new Board(this.array);
+
+	}
+
+	public void run() {
+		System.out.println("Start bubble Sort");
+		for (int i = array.length - 1; i >=0; i--) {
+			for (int j = 0; j < i; j++) {
+				if (array[i].len < array[j].len)  {
+
+					array[i].color = Color.red;
+					array[j].color = Color.red;
+
+					b.repaint(array);
+					sleep();
+
+					Point temp = array[i];
+					array[i] = array[j];
+					array[j] = temp;
+
+					
+					array[i].color = Color.white;
+					array[j].color = Color.white;
+
+					b.repaint(array);
+					sleep();
+				}
+			}
+		}
+		
+		for(int i =0 ; i < array.length; i++) {
+			array[i].color = Color.red;
+			b.repaint(array);
+			sleep();
+		}
+		
+		for(int i =0 ; i <array.length ; i++) {
+			array[i].color = Color.white;
+			b.repaint(array);
+			sleep();
+		}
+
+		System.out.println("End bubble Sort");
+	}
+
+	private void sleep() {
+		try {
+			Thread.sleep(TIME);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}
