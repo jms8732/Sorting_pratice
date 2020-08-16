@@ -1,0 +1,74 @@
+package sort_project;
+
+import java.awt.Color;
+
+/*
+ * 칵테일 정렬
+ * 1. 왼쪽으로부터 시작하여서 우측으로 가면서 교환을 진행한다.
+ * 2. 
+ */
+public class CockTailThread extends baseThread implements Runnable {
+
+	public CockTailThread(int LEN, Point[] array, int x, int y) {
+		super(LEN, array, "Cock Tail Sort", x, y);
+	}
+
+	public void run() {
+		int left = 0, pivot = left, right = array.length - 1;
+		
+		while (left < right) {
+			boolean sort= false;
+			for(int i = left ; i <right;  i++) {
+				if(array[i].len < array[i+1].len) {
+					Point temp = array[i];
+					array[i] = array[i+1];
+					array[i+1] = temp;
+					
+					array[i].color =Color.green;
+					array[i+1].color = Color.green;
+					b.repaint();
+					sleep();
+					
+					array[i].color= Color.white;
+					array[i+1].color = Color.white;
+					
+					sort = true;
+				}else
+					break;
+			}
+			
+			if(!sort) {
+				break;
+			}
+			
+			left++;
+			sort= false;
+			for(int i = right ; i >= left; i--) {
+				if(array[i].len > array[i+1].len) {
+					Point temp = array[i];
+					array[i] = array[i+1];
+					array[i+1] = temp;
+					
+					array[i].color =Color.green;
+					array[i+1].color = Color.green;
+					b.repaint();
+					sleep();
+					
+					array[i].color= Color.white;
+					array[i+1].color = Color.white;
+					
+					sort = true;
+				}else
+					break;
+			}
+			
+			if(!sort) {
+				break;
+			}
+			
+			right--;
+		}
+		finish();
+	}
+
+}

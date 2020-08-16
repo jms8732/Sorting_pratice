@@ -1,0 +1,13 @@
+package sort_project;
+
+public class QuickThread extends baseThread implements Runnable {
+	public QuickThread(int LEN, Point[] array,  int x, int y) {
+		super(LEN,array,"Quick Sort", x,y);
+	}
+	
+	
+	public void run() {
+		
+	}
+
+}

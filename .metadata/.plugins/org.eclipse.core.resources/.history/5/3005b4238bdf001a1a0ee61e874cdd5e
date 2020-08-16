@@ -1,0 +1,43 @@
+package sort_project;
+
+import java.awt.Color;
+
+public class QuickThread extends baseThread implements Runnable {
+	public QuickThread(int LEN, Point[] array,  int x, int y) {
+		super(LEN,array,"Quick Sort", x,y);
+	}
+	
+	
+	public void run() {
+		quickSort(0,array.length-1);
+	}
+	
+	private void quickSort(int left , int right) {
+		if(left < right) {
+			int pivot = (left + right ) /2;
+			int l = left;
+			int r = right;
+			
+			while(left <= right) {
+				while(array[l].len < array[pivot].len) l++;
+				while(array[r].len > array[pivot].len) r--;
+				
+				Point temp = array[l];
+				array[1] = array[r];
+				array[r] = temp;
+				
+				array[l].color = Color.red;
+				array[r].color = Color.red;
+				b.repaint();
+				
+				array[l].color = Color.white;
+				array[r].color = Color.white;
+				b.repaint();
+				sleep();
+			}
+			
+			quickSort(left,pivot-1);
+			quickSort(pivot+1,right);
+		}
+	}
+}

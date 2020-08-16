@@ -1,0 +1,19 @@
+package sort_project;
+
+public class CockTailThread extends baseThread implements Runnable {
+
+	public CockTailThread(int LEN, Point[] array, int x, int y) {
+		super(LEN, array, "Cock Tail Sort", x, y);
+	}
+
+	public void run() {
+		int left = 0, right = array.length - 1;
+
+		for (int i = left; i < array.length; i++) {
+
+		}
+
+		finish();
+	}
+
+}

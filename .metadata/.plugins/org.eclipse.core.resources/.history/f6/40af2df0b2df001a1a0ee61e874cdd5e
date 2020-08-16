@@ -1,0 +1,60 @@
+package sort_project;
+
+public class HeapThread extends baseThread implements Runnable {
+
+	public HeapThread(int LEN, Point[] array, int x, int y) {
+		super(LEN, array, "Heap Sort", x, y);
+	}
+
+	public void run() {
+		int temp[] = { 5, 3, 2, 8, 6, 9 };
+		heapSort(temp);
+
+		for (int i : temp)
+			System.out.print(i + " ");
+	}
+
+	private void heapSort(int[] temp) {
+		for (int i = temp.length; i >= 0; i--) {
+			buildTree(temp, i);
+
+			for (int j : temp)
+				System.out.print(j + " ");
+			System.out.println();
+		}
+	}
+
+	private void buildTree(int[] temp, int size) {
+		for (int i = size / 2 -1 ; i >= 0; i--) {
+			int max = 0, idx = 0;
+			
+			int left = i * 2 + 1;
+			int right = i * 2 + 2;
+
+			if (left < size && max < temp[left]) {
+				max = temp[left];
+				idx = left;
+			}
+
+			if (right < size && max < temp[right]) {
+				max = temp[right];
+				idx = right;
+			}
+			
+			if(max > temp[i]) {
+				swap(temp,idx,i);
+			}
+		
+		}
+		
+		swap(temp,0,size-1);
+
+	}
+
+	private void swap(int[] array, int idx1, int idx2) {
+		int temp = array[idx1];
+		array[idx1] = array[idx2];
+		array[idx2] = temp;
+	}
+
+}

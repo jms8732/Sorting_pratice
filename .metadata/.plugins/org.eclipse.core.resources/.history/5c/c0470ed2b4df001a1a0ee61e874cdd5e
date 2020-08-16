@@ -1,0 +1,70 @@
+package sort_project;
+
+import java.awt.Color;
+
+public class HeapThread extends baseThread implements Runnable {
+
+	public HeapThread(int LEN, Point[] array, int x, int y) {
+		super(LEN, array, "Heap Sort", x, y);
+	}
+
+	public void run() {
+		heapSort();
+		
+		for(Point p : array)
+			System.out.print(p.len + " ");
+		
+		finish();
+	}
+
+	private void heapSort() {
+		for (int i = array.length; i >= 1; i--) {
+			buildTree(i);
+		}
+	}
+
+	private void buildTree(int size) {
+		for (int i = size / 2 - 1; i >= 0; i--) {
+			double max = Integer.MAX_VALUE;
+			int idx = 0;
+
+			int left = i * 2 + 1;
+			int right = i * 2 + 2;
+
+			if (left < size && max > array[left].len) {
+				max = array[left].len;
+				idx = left;
+			}
+
+			if (right < size && max > array[right].len) {
+				max = array[right].len;
+				idx = right;
+			}
+
+			if (max > array[i].len) {
+				swap(idx, i);
+			}
+
+		}
+
+		swap(0, size - 1);
+
+	}
+
+	private void swap(int idx1, int idx2) {
+		Point temp = array[idx1];
+		temp.color = Color.red;
+		array[idx2].color =Color.red;
+		b.repaint();
+		sleep();
+		
+		array[idx1] = array[idx2];
+		array[idx2] = temp;
+		array[idx1].color =Color.white;
+		array[idx2].color = Color.white;
+		b.repaint();
+		sleep();
+		
+	}
+
+}

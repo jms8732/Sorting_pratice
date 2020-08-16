@@ -59,6 +59,7 @@ public abstract class baseThread {
 			this.h = h;
 			setSize(w+25, h+ 50);
 			setLocation(x,y);
+			setResizable(false);
 			setContentPane(new Panel());
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setVisible(true);

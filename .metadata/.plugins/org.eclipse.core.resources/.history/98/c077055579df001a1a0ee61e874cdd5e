@@ -1,0 +1,57 @@
+package sort_project;
+
+import java.awt.Color;
+
+public class CockTailThread extends baseThread implements Runnable {
+
+	public CockTailThread(int LEN, Point[] array, int x, int y) {
+		super(LEN, array, "Cock Tail Sort", x, y);
+	}
+
+	public void run() {
+		int left = 0, right = array.length-1;
+
+		while (left < right) {
+			for (int i = left + 1; i <= right; i++) {
+				if (array[i].len > array[left].len) {
+					Point temp = array[left];
+					array[left] = array[i];
+					array[i] = temp;
+
+					array[left].color = Color.green;
+					array[i].color = Color.green;
+					b.repaint();
+					sleep();
+
+					array[left].color = Color.white;
+					array[i].color = Color.white;
+					b.repaint();
+					sleep();
+				}
+			}
+
+			left++;
+			for (int i = right-1; i >= left; i--) {
+				if (array[i].len < array[right].len) {
+					Point temp = array[right];
+					array[right] = array[i];
+					array[i] = temp;
+
+					array[right].color = Color.red;
+					array[i].color = Color.red;
+					b.repaint();
+					sleep();
+
+					array[right].color = Color.white;
+					array[i].color = Color.white;
+					b.repaint();
+					sleep();
+
+				}
+			}
+			right--;
+		}
+		finish();
+	}
+
+}
