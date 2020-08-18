@@ -1,0 +1,90 @@
+package sort_project;
+
+public class TimThread extends baseThread implements Runnable {
+	private final int RUN = 32;
+
+	public TimThread(int LEN, Point[] array, int x, int y) {
+		super(LEN, array, "Tim sort", x, y);
+	}
+
+	public void run() {
+		int[] temp = { 5, 6, 8, 4, 2, 1, 9 };
+
+		timSort(temp, 0, temp.length - 1);
+	}
+
+	private void timSort(int[] temp, int left, int n) {
+
+		// 먼저, RUN의 크기로 삽입정렬로 정렬을 수행한다.
+		for (int i = 0; i < n; i += RUN) {
+			insertionSort(temp, i, Math.min(i + RUN - 1, n));
+		}
+
+		// 다음으로 합병 정렬을 수행한다.
+		for (int i = 0; i < n; i += RUN * 2) {
+			int m = Math.min(i + RUN - 1, n / 2);
+			int r = Math.min(i + RUN * 2 - 1, n - 1);
+
+			mergeSort(temp, i, m, r);
+		}
+
+	}
+
+	private void mergeSort(int[] temp, int l, int m, int r) {
+		int[] left = new int[m - l + 1];
+		int[] right = new int[r - m];
+
+		int l_idx = 0;
+		int r_idx = m - 1;
+		int k = 0;
+
+		for (int i = 0; i < m; i++) {
+			left[i] = temp[i];
+		}
+
+		for (int i = 0; i < r; i++) {
+			right[i] = temp[i];
+		}
+
+		while (l_idx < m && r_idx < r) {
+			if (left[l_idx] < right[r_idx]) {
+				temp[k++] = left[l_idx++];
+			} else
+				temp[k++] = right[r_idx++];
+		}
+
+		if (l_idx > m) {
+			for (int i = r_idx; i < r; i++) {
+				temp[k++] = left[i];
+			}
+		} else {
+			for (int i = l_idx; i < m; i++) {
+				temp[k++] = right[i];
+			}
+		}
+	}
+
+	private void print(int[] temp) {
+		for (int i = 0; i < temp.length; i++) {
+			System.out.print(temp[i] + " ");
+		}
+		System.out.println();
+	}
+
+	private void insertionSort(int[] temp, int left, int right) {
+		for (int i = left + 1; i < right; i++) {
+			int t = temp[i];
+			int j = i - 1;
+
+			while (j >= left && temp[j] > temp[j + 1]) {
+				int tmp = temp[j];
+				temp[j] = temp[j + 1];
+				temp[j + 1] = tmp;
+
+				j--;
+			}
+
+			array[j + 1] = t;
+		}
+	}
+}

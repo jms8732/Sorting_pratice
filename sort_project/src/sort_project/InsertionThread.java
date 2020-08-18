@@ -38,6 +38,9 @@ public class InsertionThread extends baseThread implements Runnable {
 			sleep();
 		}
 
+		for(Point p: array) {
+			System.out.print(p.len + " ");
+		}
 		finish();
 	}
 }

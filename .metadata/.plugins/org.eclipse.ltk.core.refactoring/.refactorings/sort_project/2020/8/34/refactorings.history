@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;sort_project.RadixTrhead&apos; to &apos;RadixThread&apos;&#x0D;&#x0A;- Original project: &apos;sort_project&apos;&#x0D;&#x0A;- Original element: &apos;sort_project.RadixTrhead&apos;&#x0D;&#x0A;- Renamed element: &apos;sort_project.RadixThread&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;RadixTrhead&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;sort_project{RadixTrhead.java[RadixTrhead" matchStrategy="1" name="RadixThread" qualified="false" references="true" similarDeclarations="false" stamp="1597593887306" textual="false" version="1.0"/>
+</session>
