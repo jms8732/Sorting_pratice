@@ -1,0 +1,12 @@
+package sort_project;
+
+public class RadixThread extends baseThread implements Runnable {
+
+	public RadixThread(int LEN, Point[] array, int x, int y) {
+		super(LEN, array, "Radix Sort", x, y);
+	}
+
+	public void run() {
+
+	}
+}

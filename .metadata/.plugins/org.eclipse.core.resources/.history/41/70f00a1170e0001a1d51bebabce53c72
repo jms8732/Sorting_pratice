@@ -1,0 +1,53 @@
+package sort_project;
+
+import java.util.*;
+
+public class RadixThread extends baseThread implements Runnable {
+	private Queue<Point>[] bucket;
+
+	public RadixThread(int LEN, Point[] array, int x, int y) {
+		super(LEN, array, "Radix Sort", x, y);
+		bucket = new LinkedList[10];
+
+		for (int i = 0; i < bucket.length; i++)
+			bucket[i] = new LinkedList<>();
+	}
+
+	public void run() {
+		int size = getSize();
+		for (int i = 0; i <= size; i++) {
+			for (Point p : array) {
+				String temp = String.valueOf((int) p.len);
+				int idx = 0;
+				if (temp.length() <= temp.length()-1 - i) {
+					idx = temp.charAt(temp.length()-i-1) - '0';
+				}
+
+				bucket[idx].add(p);
+			}
+		}
+
+		int i = 0;
+		for (Queue<Point> q : bucket) {
+			while (!q.isEmpty()) {
+				array[i++] = q.poll();
+			}
+		}
+	}
+
+	private int getSize() {
+		int ret = 0;
+		int div = array.length;
+
+		while (true) {
+			int mod = div / 10;
+			if (mod == 0)
+				break;
+
+			ret++;
+			div = mod;
+		}
+
+		return ret;
+	}
+}
