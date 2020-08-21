@@ -1,0 +1,25 @@
+package sort_project;
+
+import java.util.Arrays;
+
+public class test {
+	private static final int MIN_SIZE = 32;
+
+	public static void main(String[] args) {
+		int[] array = { 3, 1, 6, 8, 5, 7, 9 };
+
+		TimSort(array);
+	}
+
+	private static void TimSort(int [] array) {
+		if(array.length < MIN_SIZE) {
+			binaryInsertionSort(array, 0 , array.length);
+		}
+	}
+
+	private static void binaryInsertSort(int [] array , int left , int right-1) {
+		for(int i = left + 1 ; i < right ;i ++) {
+			
+		}
+	}
+}
