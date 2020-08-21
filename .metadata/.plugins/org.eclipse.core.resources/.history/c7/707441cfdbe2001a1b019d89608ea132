@@ -1,0 +1,109 @@
+package sort_project;
+
+import java.util.Arrays;
+import java.util.*;
+
+public class test {
+	private static final int MIN_SIZE = 32;
+	private static Random rn;
+	private static int[] runBase;
+	private static int[] runLen;
+	private static int top = -1;
+
+	public static void main(String[] args) {
+		rn = new Random();
+		int[] array = new int[101];
+		boolean[] check = new boolean[101];
+
+		runBase = new int[101];
+		runLen = new int[101];
+
+		for (int i = 0; i < array.length; i++)
+			array[i] = getNumber(check);
+
+		TimSort(array);
+	}
+
+	private static int getNumber(boolean[] check) {
+		while (true) {
+			int idx = rn.nextInt(check.length);
+			if (!check[idx]) {
+				check[idx] = true;
+				return idx;
+			}
+		}
+	}
+
+	private static void TimSort(int[] array) {
+		if (array.length < MIN_SIZE) {
+			binaryInsertionSort(array, 0, array.length - 1);
+		} else {
+			int remainLen = array.length;
+			int lo = 0, hi = 0;
+			while (remainLen > 0) {
+				int minRun = minRunLen(remainLen); // 현재 run의 길이
+				hi = lo + minRun;
+				int runLen = countRunAndMakeAscending(array, lo, hi);
+
+				if (runLen < minRun) {
+					int f = Math.min(remainLen, minRun);
+					binaryInsertionSort(array, lo, lo + f);
+					runLen = f;
+				}
+				// 스택에 넣는다.
+				lo = minRun;
+				remainLen -= runLen;
+			}
+			
+			print(array);
+		}
+	}
+
+	private static int countRunAndMakeAscending(int[] array, int lo, int hi) {
+		int runHi = lo + 1;
+
+		if (runHi == hi)
+			return 1;
+
+		if (Integer.compare(array[runHi++], array[lo]) < 0) { // 내림차순
+			while (runHi < hi && Integer.compare(array[runHi], array[runHi - 1]) < 0)
+				runHi++;
+			Arrays.sort(array, lo, runHi); // 오름차순으로 다시 정렬
+		} else {
+			while (runHi < hi && Integer.compare(array[runHi], array[runHi - 1]) >= 0)
+				runHi++;
+		}
+
+		return runHi - lo;
+	}
+
+	private static int minRunLen(int n) {
+
+		int r = 0;
+
+		while (n >= MIN_SIZE) {
+			r |= (n & 1);
+			n >>= 1;
+		}
+
+		return n + r;
+	}
+
+	private static void print(int[] array) {
+		for (int i : array) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+	}
+
+	private static void binaryInsertionSort(int[] array, int left, int right) {
+		for (int i = left + 1; i < right; i++) {
+			int temp = array[i];
+
+			int j = Math.abs(Arrays.binarySearch(array, 0, i, temp) + 1);
+
+			System.arraycopy(array, j, array, j + 1, i - j);
+			array[j] = temp;
+		}
+	}
+}

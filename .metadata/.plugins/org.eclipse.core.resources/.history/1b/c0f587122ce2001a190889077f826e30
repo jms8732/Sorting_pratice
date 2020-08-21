@@ -1,0 +1,16 @@
+package sort_project;
+
+public class test {
+	public static void main(String[] args) {
+		int [] array = {3,1,6,8,5,7,9};
+		
+		binaryInsertSort(array,0,array.length);
+		
+	}
+	
+	private static void binaryInsertSort(int [] array , int left , int right) {
+		for(int i = left + 1 ; i < right; i ++) {
+			
+		}
+	}
+}

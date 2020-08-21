@@ -5,7 +5,7 @@ import java.util.*;
 
 public class PlaySort {
 	private static Random rn;
-	private static final int LEN = 700;
+	private static final int LEN = 1000;
 	private static Thread[] bt;
 
 	public static void main(String[] args) {
@@ -36,7 +36,7 @@ public class PlaySort {
 		//bt[0] = new Thread(new BubbleThread(LEN, array, 0, 0));
 		//bt[1] = new Thread(new SelectionThread(LEN, array, 700, 0));
 		//bt[2] = new Thread(new InsertionThread(LEN, array, 0, 500));
-		//bt[3] = new Thread(new MergeThread(LEN, array, 700, 500));
+		bt[3] = new Thread(new MergeThread(LEN, array, 700, 500));
 		//bt[4] = new Thread(new CockTailThread(LEN, array, 1400, 500));
 		//bt[5] = new Thread(new QuickThread(LEN, array, 1400, 0));
 

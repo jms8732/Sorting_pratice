@@ -5,7 +5,7 @@ import java.util.*;
 
 public class PlaySort {
 	private static Random rn;
-	private static final int LEN = 1000;
+	private static final int LEN = 10000;
 	private static Thread[] bt;
 
 	public static void main(String[] args) {
@@ -20,20 +20,30 @@ public class PlaySort {
 		}
 
 		init(array);
+		start();
+	}
 
-		bt[3].start();
-		bt[4].start();
-		bt[5].start();
+	private static void start() {
+		for (Thread t : bt) {
+			if (t != null)
+				t.start();
+		}
 	}
 
 	private static void init(Point[] array) {
-		bt = new Thread[6];
+		bt = new Thread[9];
+
 		//bt[0] = new Thread(new BubbleThread(LEN, array, 0, 0));
 		//bt[1] = new Thread(new SelectionThread(LEN, array, 700, 0));
 		//bt[2] = new Thread(new InsertionThread(LEN, array, 0, 500));
 		bt[3] = new Thread(new MergeThread(LEN, array, 700, 500));
-		bt[4] = new Thread(new CockTailThread(LEN, array, 1400, 500));
-		bt[5] = new Thread(new QuickThread(LEN, array, 1200, 500));
+		//bt[4] = new Thread(new CockTailThread(LEN, array, 1400, 500));
+		//bt[5] = new Thread(new QuickThread(LEN, array, 1400, 0));
+
+		//bt[6] = new Thread(new HeapThread(LEN, array, 1000, 500));
+
+		//bt[7] = new Thread(new RadixThread(LEN, array, 1000, 500));
+		bt[8] = new Thread(new TimThread(LEN,array,1000,500));
 	}
 
 	private static int get_len(boolean[] check) {

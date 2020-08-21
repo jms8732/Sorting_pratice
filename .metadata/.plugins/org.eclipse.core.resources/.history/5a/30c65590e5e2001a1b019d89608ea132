@@ -1,0 +1,177 @@
+package sort_project;
+
+import java.util.Arrays;
+import java.util.*;
+
+public class test {
+	private static final int MIN_SIZE = 32;
+	private static final int LEN = 50;
+	private static Random rn;
+	private static int[] runBase;
+	private static int[] runLen;
+	private static int top = 0;
+
+	public static void main(String[] args) {
+		rn = new Random();
+		int[] array = new int[LEN];
+		boolean[] check = new boolean[LEN];
+
+		runBase = new int[LEN];
+		runLen = new int[LEN];
+
+		for (int i = 0; i < array.length; i++)
+			array[i] = getNumber(check);
+
+		TimSort(array);
+	}
+
+	private static int getNumber(boolean[] check) {
+		while (true) {
+			int idx = rn.nextInt(check.length);
+			if (!check[idx]) {
+				check[idx] = true;
+				return idx;
+			}
+		}
+	}
+
+	private static void TimSort(int[] array) {
+		if (array.length < MIN_SIZE) {
+			binaryInsertionSort(array, 0, array.length - 1);
+		} else {
+			int remainLen = array.length;
+			int lo = 0, hi = 0;
+			while (remainLen > 0) {
+				int minRun = minRunLen(remainLen); // 현재 run의 길이
+				hi = lo + minRun;
+				int runlen = countRunAndMakeAscending(array, lo, hi);
+
+				if (runlen < minRun) {
+					int f = Math.min(remainLen, minRun);
+					binaryInsertionSort(array, lo, lo + f);
+					runlen = f;
+				}
+				// 스택에 넣는다.
+				pushRun(lo, runlen);
+				mergeCollapse(array);
+
+				lo = minRun;
+				remainLen -= runlen;
+				print(array);
+			}
+
+		}
+	}
+
+	private static void mergeCollapse(int[] array) {
+		while (top > 1) {
+			int n = top - 2;
+
+			if (n > 0 && runLen[n - 1] <= runLen[n] + runLen[n + 1]) {
+				if (runLen[n - 1] < runLen[n + 1])
+					n--;
+				mergeAt(n, array);
+			} else if (runLen[n] <= runLen[n + 1]) {
+				mergeAt(n, array);
+			} else
+				break;
+		}
+	}
+
+	private static void mergeAt(int n, int[] array) {
+		int len1 = runLen[n];
+		int base1 = runBase[n];
+		int len2 = runLen[n + 1];
+		int base2 = runBase[n + 1];
+
+		if (len1 <= len2)
+			merge(n, len1, base1, len2, base2, array);
+		else
+			merge(n, len2, base2, len1, base1, array);
+
+	}
+
+	private static void merge(int n, int len1, int base1, int len2, int base2, int[] array) {
+		int[] temp = new int[len1];
+		System.arraycopy(array, base1, temp, 0, len1); // 길이가 작은 배열
+
+		int cursor1 = 0;
+		int cursor2 = base2;
+		int dest = base1;
+		len1 += dest;
+		len2 += base2;
+
+		while (dest < len1 && dest < len2) {
+			if (Integer.compare(temp[cursor1], array[cursor2]) < 0) {
+				array[dest++] = temp[cursor1++];
+			} else
+				array[dest++] = array[cursor2++];
+		}
+
+		if (dest > len1) {
+			for (int i = cursor2; i < len2; i++)
+				array[dest++] = array[i];
+		} else {
+			for (int i = cursor1; i < len1; i++) {
+				array[dest++] = array[i];
+			}
+		}
+
+		runLen[n] = len1 + len2;
+		runBase[n] = base1;
+	}
+
+	private static void pushRun(int lo, int runlen) {
+		runBase[top] = lo;
+		runLen[top] = runlen;
+		top++;
+	}
+
+	private static int countRunAndMakeAscending(int[] array, int lo, int hi) {
+		int runHi = lo + 1;
+
+		if (runHi == hi)
+			return 1;
+
+		if (Integer.compare(array[runHi++], array[lo]) < 0) { // 내림차순
+			while (runHi < hi && Integer.compare(array[runHi], array[runHi - 1]) < 0)
+				runHi++;
+			Arrays.sort(array, lo, runHi); // 오름차순으로 다시 정렬
+		} else {
+			while (runHi < hi && Integer.compare(array[runHi], array[runHi - 1]) >= 0)
+				runHi++;
+		}
+
+		return runHi - lo;
+	}
+
+	private static int minRunLen(int n) {
+
+		int r = 0;
+
+		while (n >= MIN_SIZE) {
+			r |= (n & 1);
+			n >>= 1;
+		}
+
+		return n + r;
+	}
+
+	private static void print(int[] array) {
+		for (int i : array) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+	}
+
+	private static void binaryInsertionSort(int[] array, int left, int right) {
+		for (int i = left + 1; i < right; i++) {
+			int temp = array[i];
+
+			int j = Math.abs(Arrays.binarySearch(array, left, i, temp) + 1);
+
+			System.arraycopy(array, j, array, j + 1, i - j);
+			array[j] = temp;
+		}
+	}
+}
