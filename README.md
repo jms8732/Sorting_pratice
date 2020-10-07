@@ -1,6 +1,6 @@
 # Sorting_pratice
 Java Swing 기반 정렬 알고리즘 공부
-
+Blog: https://blog.naver.com/jms8732/222109384120
 
 ## Environment
 Eclipse IDE for Java Developers - 2019-12
