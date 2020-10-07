@@ -10,7 +10,7 @@ Java, Java Swing
 
 ## Result
 ### Bubble Sort x11 speed
-![buble_gif](https://user-images.githubusercontent.com/26684848/95293925-58614200-08af-11eb-874e-64fbf84e9028.gif)
+![bubble_gif](https://user-images.githubusercontent.com/26684848/95300146-bdba3080-08b9-11eb-910c-a023660c2c8a.gif)
 
 ### Cocktail Sort x15 speed
 ![Cocktail_gif](https://user-images.githubusercontent.com/26684848/95297795-0374fa00-08b6-11eb-89ab-f0a0a8eef85e.gif)
