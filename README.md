@@ -4,11 +4,11 @@ Java Swing 기반 정렬 알고리즘 공부
 Blog: https://blog.naver.com/jms8732/222109384120
 
 ## Environment
-IDE : Eclipse IDE for Java Developers - 2019-12
-CPU : Intel Core i5-6200U @ 2.30GHz
-OS : Windows 10 Home 64 bit
-Memory : 4096MB
-Language : Java
+* IDE : Eclipse IDE for Java Developers - 2019-12
+* CPU : Intel Core i5-6200U @ 2.30GHz
+* OS : Windows 10 Home 64 bit
+* Memory : 4096MB
+* Language : Java
 
 ## Skill
 Java, Java Swing
